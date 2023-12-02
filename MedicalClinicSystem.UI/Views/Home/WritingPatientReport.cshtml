@@ -1,0 +1,121 @@
+﻿
+@using MedicalClinicSystem.EF.ViewModels;
+@model MedicalRecordVM
+
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="card mb-4">
+        <h5 class="card-header">إضافة تقرير طبي   </h5>
+        <hr class="my-0" />
+        <div class="card-body">
+            <div id="dropDownListdiv">
+              
+                <div class="row">
+                    <h1> بيانات المريض</h1>
+                    <br />
+                    <hr />
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label"> رقم المريض</label>
+                            <input type="text"
+                                   class="form-control text-center"
+                                   disabled
+                                   value="@Model.IdPatient" />
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label"> الاسم</label>
+                            <input type="text"
+                                   class="form-control text-center"
+                                   disabled
+                                   value=" @Model.PatientName" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label"> العمر</label>
+                            <input type="text"
+                                   class="form-control text-center"
+                                   disabled
+                                   value=" @Model.AgePatient" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label"> الجنس</label>
+                            <input type="text"
+                                   class="form-control text-center"
+                                   disabled
+                                   value=" @Model.PatientGender" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label"> تاريخ القدوم</label>
+                            <input type="text"
+                                   class="form-control text-center"
+                                   disabled
+                                   value=" @Model.PatientGender]" />
+                        </div>
+                    </div>
+
+
+
+                    <form action="WritingPatientReport" method="post">
+
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label"> نتائج التحليل</label>
+                                <input name="testResults" class="form-control" type="text" placeholder="نتائج التحليل" autofocus />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label">  التشخيص</label>
+                                <input name="diagnosi" class="form-control" type="text" placeholder=" التشخيص" autofocus />
+                            </div>
+                        </div>
+
+                        @Html.HiddenFor(model => model.IdPatient)
+                        @Html.HiddenFor(model => model.AgePatient)
+
+
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label">الادوية المصروفة </label>
+                                <input name="rescriptionMedications" class="form-control" type="text" placeholder="الادوية المصروفة" autofocus />
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label">  ملاحظة</label>
+                                <input name="not" class="form-control" type="text" placeholder="إضافة ملاحظة" autofocus />
+
+                            </div>
+                        </div>
+                        <hr />
+                        <hr />
+
+
+                        <div class="mt-2">
+                            <button type="submit" value="addRepot" class="btn btn-primary me-2">إضافة تقرير </button>
+                            <button type="reset" class="btn btn-label-secondary">إلغاء</button>
+                        </div>
+                    </form>
+
+                </div>
+        </div>
+
+        <!-- / Content -->
+
+    </div>
+</div>
+
+
+
+

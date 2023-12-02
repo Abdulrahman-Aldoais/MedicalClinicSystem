@@ -1,0 +1,46 @@
+﻿@using MedicalClinicSystem.EF.Models;
+@model ApplicationUser
+
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="card mb-4">
+        <h5 class="card-header">إضافةمستخدم جديد  </h5>
+        <hr class="my-0" />
+        <div class="card-body">
+            <div id="dropDownListdiv">
+
+                <div class="row">
+                    <form action="AddUser" method="post">
+                   
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label"> اسم المتخدم</label>
+                            <input name="userName" class="form-control" type="text" autofocus />
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">كلمة المرور </label>
+                            <input name="pass" class="form-control" type="text" autofocus />
+                        </div>
+                    </div>
+                  
+
+
+                        <div class="mt-2">
+                            <button type="submit" value="addRepot" class="btn btn-primary me-2">إضافة  </button>
+                            <button type="reset" class="btn btn-label-secondary">إلغاء</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- / Content -->
+
+        </div>
+    </div>
+
+

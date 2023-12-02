@@ -1,0 +1,56 @@
+﻿@using MedicalClinicSystem.EF.Models;
+@model patient
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="card mb-4">
+        <h5 class="card-header">إضافة مريض   </h5>
+      
+        <hr class="my-0" />
+        <div class="card-body">
+            <div id="dropDownListdiv">
+                <form action="AddPatient" method="post">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label"> الاسم</label>
+                                <input name="name" class="form-control" type="text" placeholder="الاسم" autofocus />
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label"> رقم الهاتف</label>
+                                <input name="phone" class="form-control" type="text" placeholder="الهاتف" autofocus />
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label">  العمر</label>
+                                <input name="age" class="form-control" type="text" placeholder="العمر" autofocus />
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label class="form-label"> الجنس</label>
+                                <input name="gender" class="form-control" type="text" placeholder="الجنس" autofocus />
+
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <button type="submit" value="Upload" class="btn btn-primary me-2">إضافة مريض </button>
+                            <button type="reset" class="btn btn-label-secondary">إلغاء</button>
+                        </div>
+</form>
+
+            </div>
+        </div>
+
+        <!-- / Content -->
+
+    </div>
+</div>
+
+
+
