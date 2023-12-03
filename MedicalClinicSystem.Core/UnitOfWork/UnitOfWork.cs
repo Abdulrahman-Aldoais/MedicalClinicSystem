@@ -1,7 +1,7 @@
 ﻿using MedicalClinicSystem.Core.Repositories.Implementations;
 using MedicalClinicSystem.Core.Repositories.Interfaces;
 using MedicalClinicSystem.Core.Serveic;
-using MedicalClinicSystem.EF.DataContex;
+using MedicalClinicSystem.EF.Contex;
 using MedicalClinicSystem.EF.Models;
 using MedicalClinicSystem.EF.ViewModels;
 using Microsoft.AspNetCore.Hosting;

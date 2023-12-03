@@ -1,22 +1,14 @@
 ﻿using MedicalClinicSystem.EF.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Numerics;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Linq;
 
-namespace MedicalClinicSystem.EF.DataContex
+namespace MedicalClinicSystem.EF.Contex
 {
-    public  class MedicalClinicContext: IdentityDbContext<ApplicationUser>
+    public class MedicalClinicContext : DbContext
+    //: IdentityDbContext<ApplicationUser>
     {
         public MedicalClinicContext(DbContextOptions<MedicalClinicContext> options)
             : base(options)
@@ -67,8 +59,8 @@ namespace MedicalClinicSystem.EF.DataContex
                     Phone = "773453534",
 
 
-                } );
-                
+                });
+
 
             string HashPassword(string password)
             {

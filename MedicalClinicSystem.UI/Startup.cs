@@ -1,31 +1,19 @@
-using MedicalClinicSystem.Core.Serveic;
+using MedicalClinicSystem.Core.UnitOfWork;
+using MedicalClinicSystem.EF.Contex;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using MedicalClinicSystem.EF.DataContex;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Rotativa.AspNetCore;
-using Microsoft.AspNetCore.Identity;
-using MedicalClinicSystem.EF.Models;
-using MedicalClinicSystem.Core.UnitOfWork;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.Extensions.Options;
+using System;
 
 namespace MedicalClinicSystem.UI
 {
     public class Startup
     {
-       
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,12 +28,18 @@ namespace MedicalClinicSystem.UI
             services.AddAutoMapper(typeof(Startup));
 
             services.AddDistributedMemoryCache();
-            services.AddSession(options => {
+            services.AddSession(options =>
+            {
                 options.IdleTimeout = TimeSpan.FromMinutes(1);// here you can mention the timings
             });
             services.AddControllers();
-           
+
             services.AddMvc();
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<MedicalClinicContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
 
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -61,12 +55,12 @@ namespace MedicalClinicSystem.UI
             // Add other services as needed
             services.AddControllers();
 
-      
+
 
         }
 
-            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

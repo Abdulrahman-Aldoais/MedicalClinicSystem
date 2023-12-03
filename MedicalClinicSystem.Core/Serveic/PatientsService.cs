@@ -1,4 +1,4 @@
-﻿using MedicalClinicSystem.EF.DataContex;
+﻿using MedicalClinicSystem.EF.Contex;
 using MedicalClinicSystem.EF.Models;
 using Microsoft.EntityFrameworkCore;
 using System;

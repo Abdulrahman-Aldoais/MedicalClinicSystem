@@ -1,6 +1,4 @@
-﻿using MedicalClinicSystem.Core.Serveic;
-using MedicalClinicSystem.EF.DataContex;
-using MedicalClinicSystem.EF.Models;
+﻿using MedicalClinicSystem.EF.Models;
 using MedicalClinicSystem.EF.ViewModels;
 using MedicalClinicSystem.UI.Models;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +23,7 @@ namespace MedicalClinicSystem.UI.Controllers
         private readonly IHttpContextAccessor httpContextAccessor;
 
         public HomeController(
-            ILogger<HomeController> logger, 
+            ILogger<HomeController> logger,
              HttpClient httpClient,
              IHttpContextAccessor httpContextAccessor
              )
@@ -71,14 +69,14 @@ namespace MedicalClinicSystem.UI.Controllers
         [HttpGet]
         public IActionResult AddUser()
         {
-             /*if (response.IsSuccessStatusCode)
-            {
-                return View(dataUser);
-            }
-            else
-            {
-                return View("Error");
-            }*/
+            /*if (response.IsSuccessStatusCode)
+           {
+               return View(dataUser);
+           }
+           else
+           {
+               return View("Error");
+           }*/
             return View();
         }
         [HttpPost]
@@ -87,7 +85,7 @@ namespace MedicalClinicSystem.UI.Controllers
             var salt = DateTime.Now.ToString();
 
             var HashedPW = HashPassword($"{pass}{salt}");
-            UserModel dataUser = new UserModel { UserName = userName, Pass = HashedPW, Salt=salt };
+            UserModel dataUser = new UserModel { UserName = userName, Pass = HashedPW, Salt = salt };
             string data = JsonSerializer.Serialize(dataUser);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.PostAsync("https://localhost:5001/api/Main/User", content);
@@ -106,25 +104,25 @@ namespace MedicalClinicSystem.UI.Controllers
         [HttpGet]
         public IActionResult AddPatient()
         {
-          
+
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddPatient(string name, string phone,int age, char gender)
+        public async Task<IActionResult> AddPatient(string name, string phone, int age, char gender)
         {
 
-            patient dataUser = new patient { Name = name, Phone = phone, Age=age, Gender=gender };
+            patient dataUser = new patient { Name = name, Phone = phone, Age = age, Gender = gender };
             string data = JsonSerializer.Serialize(dataUser);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.PostAsync("https://localhost:5001/api/Main/AddPatient", content);
-           
+
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> ViewPatientDetails(int id)
         {
-            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:5001/api/Main/GetPatient/"+id);
+            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:5001/api/Main/GetPatient/" + id);
             if (response.IsSuccessStatusCode)
             {
                 string data = await response.Content.ReadAsStringAsync();
@@ -137,7 +135,7 @@ namespace MedicalClinicSystem.UI.Controllers
             }
         }
 
-       
+
         public async Task<IActionResult> WritingPatientReport(int id)
         {
             HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:5001/api/Main/GetPatient/" + id);
@@ -151,7 +149,7 @@ namespace MedicalClinicSystem.UI.Controllers
                     IdPatient = Patiant.Id,
                     PatientName = Patiant.Name,
                     AgePatient = Patiant.Age,
-                    PatientDiagnosi= Patiant.Diagnosi,
+                    PatientDiagnosi = Patiant.Diagnosi,
                     PatientGender = Patiant.Gender,
                     PatientPhone = Patiant.Phone,
                 };
@@ -166,20 +164,27 @@ namespace MedicalClinicSystem.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> WritingPatientReport(string testResults, string rescriptionMedications,string not,string diagnosi, MedicalRecordVM medicalRecordVM)
+        public async Task<IActionResult> WritingPatientReport(string testResults, string rescriptionMedications, string not, string diagnosi, MedicalRecordVM medicalRecordVM)
         {
             if (ModelState.IsValid)
             {
-                MedicalRecordVM dataUser = new MedicalRecordVM { IdPatient = medicalRecordVM.IdPatient,
-                    IdDoctor = httpContextAccessor.HttpContext.Session.GetString("DoctorId"),AgePatient =medicalRecordVM.AgePatient,
-                    TestResults = testResults, RescriptionMedications =rescriptionMedications, Not =not, PatientDiagnosi=diagnosi };
+                MedicalRecordVM dataUser = new MedicalRecordVM
+                {
+                    IdPatient = medicalRecordVM.IdPatient,
+                    IdDoctor = httpContextAccessor.HttpContext.Session.GetString("DoctorId"),
+                    AgePatient = medicalRecordVM.AgePatient,
+                    TestResults = testResults,
+                    RescriptionMedications = rescriptionMedications,
+                    Not = not,
+                    PatientDiagnosi = diagnosi
+                };
 
                 string data = JsonSerializer.Serialize(dataUser);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await _httpClient.PostAsync("https://localhost:5001/api/Main/AddReportPatient", content);
                 if (response.IsSuccessStatusCode)
                 {
-                    
+
 
 
                     return RedirectToAction(nameof(AllPatients));
@@ -216,11 +221,11 @@ namespace MedicalClinicSystem.UI.Controllers
                     PatientDiagnosi = Patiant.Diagnosis,
                     TestResults = Patiant.TestResults,
                     RescriptionMedications = Patiant.RescriptionMedications,
-                    Not= Patiant.Not,
+                    Not = Patiant.Not,
                 };
 
 
-                return  new ViewAsPdf("PatientRepotAsPDF", result)
+                return new ViewAsPdf("PatientRepotAsPDF", result)
                 {
                     PageOrientation = Orientation.Portrait,
                     MinimumFontSize = 25,
@@ -231,8 +236,8 @@ namespace MedicalClinicSystem.UI.Controllers
             return NotFound();
         }
 
-     
-        
+
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<patient>>> PatientSearchByName(string searchString)
         {
@@ -244,17 +249,17 @@ namespace MedicalClinicSystem.UI.Controllers
                 {
                     string data = await response.Content.ReadAsStringAsync();
                     List<patient> filteredResult = Newtonsoft.Json.JsonConvert.DeserializeObject<List<patient>>(data);
-                   
-                   
+
+
                     return View("AllPatients", filteredResult);
                 }
                 else
                 {
                     return View("Error");
                 }
-                
+
             }
-          
+
             return View();
         }
 

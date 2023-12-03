@@ -1,16 +1,12 @@
 ﻿using MedicalClinicSystem.Core.Repositories.Interfaces;
-using MedicalClinicSystem.Core.Serveic;
-using MedicalClinicSystem.EF.DataContex;
+using MedicalClinicSystem.EF.Contex;
 using MedicalClinicSystem.EF.Models;
 using MedicalClinicSystem.EF.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MedicalClinicSystem.Core.Repositories.Implementations
@@ -69,8 +65,8 @@ namespace MedicalClinicSystem.Core.Repositories.Implementations
             {
                 IdPatient = data.IdPatient,
                 IdDoctor = data.IdDoctor,
-                Diagnosis= data.PatientDiagnosi,
-                AgePatient= data.AgePatient,
+                Diagnosis = data.PatientDiagnosi,
+                AgePatient = data.AgePatient,
                 TestResults = data.TestResults,
                 RescriptionMedications = data.RescriptionMedications,
                 Not = data.Not,
@@ -81,6 +77,6 @@ namespace MedicalClinicSystem.Core.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
-      
+
     }
 }

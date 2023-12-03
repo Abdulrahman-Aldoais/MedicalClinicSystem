@@ -1,26 +1,13 @@
-using MedicalClinicSystem.Core.Serveic;
+using MedicalClinicSystem.Core.UnitOfWork;
+using MedicalClinicSystem.EF.Contex;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MedicalClinicSystem.EF.DataContex;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using MedicalClinicSystem.Core.UnitOfWork;
-using MedicalClinicSystem.EF.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace MedicalClinicSystem.API
 {
@@ -49,10 +36,10 @@ namespace MedicalClinicSystem.API
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(
-             options => options.SignIn.RequireConfirmedAccount = true)
-             .AddEntityFrameworkStores<MedicalClinicContext>()
-            .AddDefaultTokenProviders();
+            //services.AddIdentity<ApplicationUser, IdentityRole>(
+            // options => options.SignIn.RequireConfirmedAccount = true)
+            // .AddEntityFrameworkStores<MedicalClinicContext>()
+            //.AddDefaultTokenProviders();
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

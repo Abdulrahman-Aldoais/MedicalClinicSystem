@@ -1,17 +1,12 @@
-﻿using MedicalClinicSystem.EF.Models;
+﻿using MedicalClinicSystem.Core.UnitOfWork;
+using MedicalClinicSystem.EF.Models;
+using MedicalClinicSystem.EF.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using MedicalClinicSystem.Core.Serveic;
-using System.Threading.Tasks;
-using System.Linq;
-using MedicalClinicSystem.EF.DataContex;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using MedicalClinicSystem.Core.UnitOfWork;
-using MedicalClinicSystem.EF.ViewModels;
-using System.Reflection;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MedicalClinicSystem.API.Controllers
 {
@@ -21,7 +16,7 @@ namespace MedicalClinicSystem.API.Controllers
     {
 
         private readonly IUnitOfWork unitOfWork;
-       
+
         public Main(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;

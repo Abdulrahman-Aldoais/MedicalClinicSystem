@@ -1,17 +1,10 @@
-﻿using MedicalClinicSystem.EF.DataContex;
+﻿using MedicalClinicSystem.EF.Contex;
 using MedicalClinicSystem.EF.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Linq;
 using System.Security.Cryptography;
-using System.IO;
-using System.Web.Http.Results;
+using System.Text;
 
 namespace MedicalClinicSystem.Core.Serveic
 {
@@ -27,8 +20,8 @@ namespace MedicalClinicSystem.Core.Serveic
         }
         public ApplicationUser CheckFromUserLogin(string userName, string password)
         {
-          
-            var result =  _context.Users.Where(d=>d.UserName==userName).FirstOrDefault();
+
+            var result = _context.Users.Where(d => d.UserName == userName).FirstOrDefault();
 
             if (HashPassword($"{password}{result.Salt}") == result.Pass)
             {
