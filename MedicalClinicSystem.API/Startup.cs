@@ -31,15 +31,13 @@ namespace MedicalClinicSystem.API
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<MedicalClinicContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                //options.UseSqlServer(connectionString);
+                options.UseSqlServer("Data Source=DESKTOP-CEOJM8V\\SQL2016;Initial Catalog=MedicalClinicSystem;Integrated Security=True;Integrated security=SSPI;MultipleActiveResultSets=True;trustservercertificate=True;");
+
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            //services.AddIdentity<ApplicationUser, IdentityRole>(
-            // options => options.SignIn.RequireConfirmedAccount = true)
-            // .AddEntityFrameworkStores<MedicalClinicContext>()
-            //.AddDefaultTokenProviders();
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
